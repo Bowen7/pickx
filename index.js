@@ -1,4 +1,5 @@
 const quickselect = require('quickselect')
+
 const pickWithoutWeight = (values, options) => {
   let { random = Math.random, count = 1 } = options
   const length = values.length
@@ -85,12 +86,6 @@ const pickx = (values, weights, options = {}) => {
     return pickWithoutWeight(values, options)
   }
   return pickWithWeight(values, weights, options)
-}
-
-const counter = { x: 0, y: 0, z: 0 }
-for (let i = 0; i < 1000; i++) {
-  const re = pickx(['x', 'y', 'z'], [1, 2, 3], { count: 2 })
-  re.forEach((item) => counter[item]++)
 }
 
 module.exports = pickx
