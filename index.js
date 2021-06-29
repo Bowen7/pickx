@@ -68,14 +68,15 @@ const pickx = (values, weights, options = {}) => {
       _values.push(key)
       weights.push(values[key])
     })
+    values = _values
   }
 
   if (weights) {
     if (weights.some((weight) => !(typeof weight === 'number' && weight > 0))) {
-      return console.error('weight should be a number')
+      throw new Error('weight should be a positive number')
     }
     if (weights.length !== values.length) {
-      return console.error("values don't match weights")
+      throw new Error("values don't match weights")
     }
   }
 
