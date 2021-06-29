@@ -1,9 +1,8 @@
 const quickselect = require('quickselect')
 
 const pickWithoutWeight = (values, options) => {
-  let { random = Math.random, count = 1 } = options
+  const { random = Math.random, count = 1 } = options
   const length = values.length
-  count = Math.min(length, count)
 
   const result = []
   for (let i = 0; i < count; i++) {
@@ -18,9 +17,7 @@ const pickWithoutWeight = (values, options) => {
 }
 
 const pickWithWeight = (values, weights, options) => {
-  let { random = Math.random, count = 1 } = options
-  const length = values.length
-  count = Math.min(length, count)
+  const { random = Math.random, count = 1 } = options
 
   // https://stackoverflow.com/questions/2140787/select-k-random-elements-from-a-list-whose-elements-have-weights
   const result = values.map((value, index) => {
@@ -82,6 +79,10 @@ const pickx = (values, weights, options = {}) => {
     }
   }
 
+  const { count = 1 } = options
+  if (count >= values.length) {
+    return values
+  }
   if (!weights) {
     return pickWithoutWeight(values, options)
   }
